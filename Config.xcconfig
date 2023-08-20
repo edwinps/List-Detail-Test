@@ -1,0 +1,15 @@
+//
+//  Config.xcconfig
+//  List-Detail-Test
+//
+//  Created by Edwin Peña Sanchez on 20/8/23.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+// Application name
+APPLICATION_NAME = List-Detail-Test
+
+// API endpoint
+API_URL = localhost:8000

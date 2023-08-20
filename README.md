@@ -1,3 +1,10 @@
+_Before executing the app, you must run the underlying server providing the static JSON data._
+
+```zsh
+npm install -g json-server
+json-server test.json --port 8000
+```
+
 ## Architecture
 
 The app follows the Clean Architecture pattern, which separates the project into distinct layers: Data, Domain, and Presentation. This separation promotes modularity, testability, and maintainability.
