@@ -1,6 +1,5 @@
 {
-  "movies": [
-    {
+  "movies": [{
       "id": 1,
       "title": "The Shawshank Redemption"
     },
@@ -21,46 +20,50 @@
       "title": "Forrest Gump"
     }
   ],
-  "detail": {
-    "1": {
+  "detail": [{
+      "id": 1,
       "title": "The Shawshank Redemption",
       "genre": "Drama",
       "releaseYear": 1994,
       "director": "Frank Darabont",
       "plot": "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
-      "posterUrl": "https://source.unsplash.com/random/500x500"
+      "posterURL": "https://source.unsplash.com/random/500x500"
     },
-    "2": {
+    {
+      "id": 2,
       "title": "The Godfather",
       "genre": "Crime",
       "releaseYear": 1972,
       "director": "Francis Ford Coppola",
       "plot": "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
-      "posterUrl": "https://source.unsplash.com/random/500x500"
+      "posterURL": "https://source.unsplash.com/random/500x500"
     },
-    "3": {
+    {
+      "id": 3,
       "title": "The Dark Knight",
       "genre": "Action",
       "releaseYear": 2008,
       "director": "Christopher Nolan",
       "plot": "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
-      "posterUrl": "https://source.unsplash.com/random/500x500"
+      "posterURL": "https://source.unsplash.com/random/500x500"
     },
-      "4": {
+    {
+      "id": 4,
       "title": "Pulp Fiction",
       "genre": "Action",
       "releaseYear": 1994,
       "director": "Quentin Tarantino",
       "plot": "",
-      "posterUrl": "https://source.unsplash.com/random/500x500"
+      "posterURL": "https://source.unsplash.com/random/500x500"
     },
-      "5": {
+    {
+      "id": 5,
       "title": "Forrest Gump",
       "genre": "Crime",
       "releaseYear": 1994,
       "director": "Robert Zemeckis",
       "plot": "",
-      "posterUrl": "https://source.unsplash.com/random/500x500"
+      "posterURL": "https://source.unsplash.com/random/500x500"
     }
-  }
+  ]
 }

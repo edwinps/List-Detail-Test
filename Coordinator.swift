@@ -11,7 +11,6 @@ import Foundation
 enum Page: String, Identifiable {
     case list
     case detail
-    
     var id: String {
         self.rawValue
     }
@@ -20,10 +19,12 @@ enum Page: String, Identifiable {
 class Coordinator: ObservableObject {
     @Published var path = NavigationPath()
     private let movieUseCase: MovieUseCase
+    private var movieViewModel: MovieViewModel
     var movieID: Int?
     
     init(movieUseCase: MovieUseCase = MovieUseCaseImplementation()) {
         self.movieUseCase = movieUseCase
+        self.movieViewModel = MovieViewModel(useCase: movieUseCase)
     }
     
     func push(_ page: Page) {
@@ -38,8 +39,7 @@ class Coordinator: ObservableObject {
     func build(page: Page) -> some View {
         switch page {
         case .list:
-            let viewModel = MovieViewModel(useCase: movieUseCase)
-            MovieListView(viewModel: viewModel)
+            MovieListView(viewModel: movieViewModel)
         case .detail:
             if let movieID = self.movieID {
                 let viewModel = MovieDetailViewModel(movieID: movieID,

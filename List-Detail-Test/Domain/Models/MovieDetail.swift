@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct MovieDetail: Decodable {
+struct MovieDetail {
     let id: Int
     let title: String
     let genre: String
-    let releaseYear: String
+    let releaseYear: Int
     let plot: String
-    let posterURL: URL
+    let posterURL: URL?
 }

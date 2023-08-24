@@ -55,6 +55,6 @@ private extension MovieUseCaseImplementation {
                            genre: dto.genre,
                            releaseYear: dto.releaseYear,
                            plot: dto.plot,
-                           posterURL: dto.posterURL)
+                           posterURL: URL(string: dto.posterURL))
     }
 }

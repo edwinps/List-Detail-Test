@@ -11,36 +11,39 @@ struct MovieDetailView: View {
     @ObservedObject var viewModel: MovieDetailViewModel
     
     var body: some View {
-        VStack {
-            if let movieDetail = viewModel.movieDetail {
-                VStack {
-                    RemoteImage(url: movieDetail.posterURL)
-                        .aspectRatio(contentMode: .fit)
-                        .frame(maxHeight: 200)
-                    
-                    Text(movieDetail.genre)
-                        .font(.headline)
-                        .padding()
-                    
-                    Text("Release Year: \(movieDetail.releaseYear)")
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                        .padding()
-                    
-                    Text(movieDetail.plot)
-                        .padding()
-                    
-                    Spacer()
+        GeometryReader { geometry in
+            VStack {
+                if let movieDetail = viewModel.movieDetail {
+                    VStack(alignment: .leading, spacing: 15)  {
+                        RemoteImage(url: movieDetail.posterURL)
+                            .aspectRatio(contentMode: .fit)
+                            .frame(maxWidth: geometry.size.width)
+                            .padding(.horizontal)
+                        
+                        Text(movieDetail.genre)
+                            .font(.headline)
+                            .padding(.horizontal)
+                        
+                        Text("Release Year: \(movieDetail.releaseYear)")
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                            .padding(.horizontal)
+                        
+                        Text(movieDetail.plot)
+                            .padding(.horizontal)
+                        
+                        Spacer()
+                    }
+                    .navigationBarTitle(viewModel.movieDetail?.title ?? "", displayMode: .inline)
+                    .padding()
+                } else {
+                    ProgressView()
                 }
-                .navigationBarTitle(viewModel.movieDetail?.title ?? "", displayMode: .inline)
-                .padding()
-            } else {
-                ProgressView()
             }
-        }
-        .onAppear {
-            Task {
-                await viewModel.fetchMovieDetail()
+            .onAppear {
+                Task {
+                    await viewModel.fetchMovieDetail()
+                }
             }
         }
     }

@@ -20,7 +20,10 @@ class MovieDetailViewModel: ObservableObject {
     
     func fetchMovieDetail() async {
         do {
-            movieDetail = try await useCase.fetchMovieDetail(id: movieID).getData()
+            let fetchMovie = try await useCase.fetchMovieDetail(id: movieID).getData()
+            DispatchQueue.main.async {
+                self.movieDetail = fetchMovie
+            }
         } catch {
             print("Error fetching movie: \(error)")
         }

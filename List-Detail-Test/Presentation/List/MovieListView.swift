@@ -31,6 +31,9 @@ struct MovieListView: View {
                         await viewModel.fetchMovies()
                     }
                 }
+                .refreshable {
+                    await viewModel.fetchMovies()
+                }
                 .navigationTitle("Movies")
             }
         }

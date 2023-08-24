@@ -11,7 +11,7 @@ struct MovieDetailDTO: Decodable {
     let id: Int
     let title: String
     let genre: String
-    let releaseYear: String
+    let releaseYear: Int
     let plot: String
-    let posterURL: URL
+    let posterURL: String
 }

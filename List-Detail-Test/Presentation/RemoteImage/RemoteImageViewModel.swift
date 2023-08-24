@@ -9,15 +9,23 @@ import Foundation
 
 class RemoteImageViewModel: ObservableObject {
     @Published var imageData: Data?
+    private let url: URL?
     private let loadImageUseCase: LoadImageUseCase
     
-    init(loadImageUseCase: LoadImageUseCase = LoadImageUseCaseImplementation()) {
+    init(url: URL?,
+         loadImageUseCase: LoadImageUseCase = LoadImageUseCaseImplementation()) {
+        self.url = url
         self.loadImageUseCase = loadImageUseCase
     }
     
-    func loadImage(from url: URL) async {
+    func loadImage() async {
         do {
-            self.imageData = try await loadImageUseCase.fetchImage(from: url)
+            if let url = url {
+                let imageData = try await loadImageUseCase.fetchImage(from: url)
+                DispatchQueue.main.async {
+                    self.imageData = imageData
+                }
+            }
         } catch {
             print("Error loading image: \(error)")
         }
