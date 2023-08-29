@@ -1,16 +1,16 @@
 //
-//  MovieViewModel.swift
+//  MovieListViewModel.swift
 //  List-Detail-Test
 //
 //  Created by Edwin Peña Sanchez on 20/8/23.
 //
 import Foundation
 
-class MovieViewModel: ObservableObject {
+final class MovieListViewModel: ObservableObject {
     @Published var movies: [Movie] = []
     private let useCase: MovieUseCase
     
-    init(useCase: MovieUseCase) {
+    init(useCase: MovieUseCase = MovieUseCaseImplementation()) {
         self.useCase = useCase
     }
     

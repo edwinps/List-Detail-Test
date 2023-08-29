@@ -21,7 +21,7 @@ struct MovieUseCaseImplementation: MovieUseCase {
     
     func fetchMovies() async -> AsyncResult<[Movie], Error> {
         do {
-            let url = Environment.apiUrl.appendingPathComponent("/movies")
+            let url = try Environment.apiUrl().appendingPathComponent("/movies")
             let data = try await urlSession.asyncDataTask(with: url).getData()
             let dto = try JSONDecoder().decode([MovieDTO].self, from: data)
             let movies = dto.map(transformDTOToMovies)
@@ -33,7 +33,7 @@ struct MovieUseCaseImplementation: MovieUseCase {
     
     func fetchMovieDetail(id: Int) async -> AsyncResult<MovieDetail, Error> {
         do {
-            let url = Environment.apiUrl.appendingPathComponent("/detail/\(id)")
+            let url = try Environment.apiUrl().appendingPathComponent("/detail/\(id)")
             let data = try await urlSession.asyncDataTask(with: url).getData()
             let dto = try JSONDecoder().decode(MovieDetailDTO.self, from: data)
             let movie = transformDTOToMovieDetail(dto)

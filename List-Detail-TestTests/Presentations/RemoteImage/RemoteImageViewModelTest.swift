@@ -8,7 +8,7 @@
 import XCTest
 @testable import List_Detail_Test
 
-class RemoteImageViewModelTests: XCTestCase {
+final class RemoteImageViewModelTests: XCTestCase {
     var viewModel: RemoteImageViewModel!
     var mockUseCase: MockLoadImageUseCase!
     var url: URL!

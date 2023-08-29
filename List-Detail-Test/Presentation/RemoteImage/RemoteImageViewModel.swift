@@ -7,7 +7,7 @@
 
 import Foundation
 
-class RemoteImageViewModel: ObservableObject {
+final class RemoteImageViewModel: ObservableObject {
     @Published var imageData: Data?
     private let url: URL?
     private let loadImageUseCase: LoadImageUseCase

@@ -7,13 +7,12 @@
 
 import Foundation
 
-class MovieDetailViewModel: ObservableObject {
+final class MovieDetailViewModel: ObservableObject {
     @Published var movieDetail: MovieDetail?
-    
     private let movieID: Int
     private let useCase: MovieUseCase
     
-    init(movieID: Int, useCase: MovieUseCase) {
+    init(movieID: Int, useCase: MovieUseCase = MovieUseCaseImplementation()) {
         self.movieID = movieID
         self.useCase = useCase
     }

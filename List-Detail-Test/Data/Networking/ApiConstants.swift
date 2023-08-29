@@ -7,21 +7,24 @@
 
 import Foundation
 
+enum EnvironmentError: Error {
+    case plistFileNotFound
+    case apiUrlNotSet
+}
+
 enum Environment {
-
-    // MARK: - Plist
-    private static let infoDictionary: [String: Any] = {
-        guard let dict = Bundle.main.infoDictionary else {
-            fatalError("Plist file not found")
+    private static let defaultBundle = Bundle.main
+    
+    static func apiUrl(bundle: Bundle = defaultBundle) throws -> URL {
+        guard let dict = bundle.infoDictionary else {
+            throw EnvironmentError.plistFileNotFound
         }
-        return dict
-    }()
-
-    static let apiUrl: URL = {
-        guard let apiUrlString = Environment.infoDictionary["API_URL"] as? String,
-            let url = URL(string: "http://\(apiUrlString)") else {
-            fatalError("Api Url is not set in plist for this environment")
+        
+        guard let apiUrlString = dict["API_URL"] as? String,
+              let url = URL(string: "http://\(apiUrlString)") else {
+            throw EnvironmentError.apiUrlNotSet
         }
+        
         return url
-    }()
+    }
 }

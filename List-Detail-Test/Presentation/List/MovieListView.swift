@@ -8,34 +8,29 @@
 import SwiftUI
 
 struct MovieListView: View {
-    @ObservedObject private var viewModel: MovieViewModel
-    @EnvironmentObject private var coordinator: Coordinator
+    @ObservedObject private var viewModel: MovieListViewModel
+    @EnvironmentObject private var coordinatorViewModel: CoordinatorViewModel
     
-    init(viewModel: MovieViewModel) {
+    init(viewModel: MovieListViewModel) {
         self.viewModel = viewModel
     }
     
     var body: some View {
-        NavigationView {
-            NavigationStack(path: $coordinator.path) {
-                List(viewModel.movies) { movie in
-                    Button(action: {
-                        coordinator.movieID = movie.id
-                        coordinator.push(.detail)
-                    }) {
-                        Text(movie.title)
-                    }
+        NavigationView()  {
+            List(viewModel.movies) { movie in
+                Button(movie.title) {
+                    coordinatorViewModel.navigate(to: .detail(id: movie.id))
                 }
-                .onAppear {
-                    Task {
-                        await viewModel.fetchMovies()
-                    }
-                }
-                .refreshable {
+            }
+            .onAppear {
+                Task {
                     await viewModel.fetchMovies()
                 }
-                .navigationTitle("Movies")
             }
+            .refreshable {
+                await viewModel.fetchMovies()
+            }
+            .navigationTitle("Movies")
         }
     }
 }

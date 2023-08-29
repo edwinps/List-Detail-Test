@@ -9,7 +9,6 @@ import XCTest
 @testable import List_Detail_Test
 
 final class URLSessionAsyncDataTaskTests: XCTestCase {
-    
     func testAsyncDataTask_Success() async throws {
         let mockUrlSession = MockURLSession()
         guard let testDataURL = URL(string: "https://example.com"),

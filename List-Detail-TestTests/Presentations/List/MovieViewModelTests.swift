@@ -8,14 +8,14 @@
 import XCTest
 @testable import List_Detail_Test
 
-class MovieViewModelTests: XCTestCase {
+final class MovieViewModelTests: XCTestCase {
     var mockUseCase: MockMovieUseCase!
-    var viewModel: MovieViewModel!
+    var viewModel: MovieListViewModel!
 
     override func setUp() {
         super.setUp()
         mockUseCase = MockMovieUseCase()
-        viewModel = MovieViewModel(useCase: mockUseCase)
+        viewModel = MovieListViewModel(useCase: mockUseCase)
     }
 
     override func tearDown() {

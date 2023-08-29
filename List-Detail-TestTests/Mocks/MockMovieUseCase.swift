@@ -8,7 +8,7 @@
 import XCTest
 @testable import List_Detail_Test
 
-class MockMovieUseCase: MovieUseCase {
+final class MockMovieUseCase: MovieUseCase {
     var fetchMoviesResult: AsyncResult<[Movie], Error> = .success([])
     var fetchMovieDetailResult: AsyncResult<MovieDetail, Error> = .success(MovieDetail(id: 0,
                                                                                        title: "title",

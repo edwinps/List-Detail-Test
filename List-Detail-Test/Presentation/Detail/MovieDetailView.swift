@@ -9,35 +9,21 @@ import SwiftUI
 
 struct MovieDetailView: View {
     @ObservedObject var viewModel: MovieDetailViewModel
+    @EnvironmentObject private var coordinatorViewModel: CoordinatorViewModel
+    
+    init(viewModel: MovieDetailViewModel) {
+        self.viewModel = viewModel
+    }
     
     var body: some View {
         GeometryReader { geometry in
             VStack {
                 if let movieDetail = viewModel.movieDetail {
-                    VStack(alignment: .leading, spacing: 15)  {
-                        RemoteImage(url: movieDetail.posterURL)
-                            .aspectRatio(contentMode: .fit)
-                            .frame(maxWidth: geometry.size.width)
-                            .padding(.horizontal)
-                        
-                        Text(movieDetail.genre)
-                            .font(.headline)
-                            .padding(.horizontal)
-                        
-                        Text("Release Year: \(movieDetail.releaseYear)")
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
-                            .padding(.horizontal)
-                        
-                        Text(movieDetail.plot)
-                            .padding(.horizontal)
-                        
-                        Spacer()
-                    }
-                    .navigationBarTitle(viewModel.movieDetail?.title ?? "", displayMode: .inline)
-                    .padding()
+                    buildDetail(with: movieDetail,
+                                geometry: geometry)
                 } else {
-                    ProgressView()
+                    buildProgressView(width: geometry.size.width,
+                                      height: geometry.size.height)
                 }
             }
             .onAppear {
@@ -46,5 +32,41 @@ struct MovieDetailView: View {
                 }
             }
         }
+    }
+}
+
+private extension MovieDetailView {
+    func buildDetail(with model: MovieDetail, geometry: GeometryProxy) -> some View {
+        VStack(alignment: .leading, spacing: 15)  {
+            buildRemoteImage(with: model.posterURL,
+                             width: geometry.size.width)
+            Text(model.genre)
+                .font(.headline)
+                .padding(.horizontal)
+            
+            Text("Release Year: \(model.releaseYear)")
+                .font(.subheadline)
+                .foregroundColor(.gray)
+                .padding(.horizontal)
+            
+            Text(model.plot)
+                .padding(.horizontal)
+            
+            Spacer()
+        }
+        .navigationTitle(viewModel.movieDetail?.title ?? "")
+        .padding()
+    }
+    
+    func buildRemoteImage(with url: URL?, width: Double) -> some View {
+        RemoteImage(url: url)
+            .aspectRatio(contentMode: .fit)
+            .frame(maxWidth: width)
+            .padding(.horizontal)
+    }
+    func buildProgressView(width: Double, height: Double) -> some View {
+        ProgressView()
+            .frame(width: width, height: height)
+            .ignoresSafeArea()
     }
 }
