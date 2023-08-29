@@ -2,7 +2,7 @@ _Before executing the app, you must run the underlying server providing the stat
 
 ```zsh
 npm install -g json-server
-json-server test.json --port 8000
+json-server movies.json --port 8000
 ```
 
 ## Architecture
